@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.809.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cedesistemas.NetCore.PruebasDeConcepto", "Cedesistemas.NetCore.PruebasDeConcepto\Cedesistemas.NetCore.PruebasDeConcepto.csproj", "{CD7EC5CE-2D9D-4969-BE38-319D0C7AA0AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cedesistemas.NetCore.WebApi", "Cedesistemas.NetCore.WebApi\Cedesistemas.NetCore.WebApi.csproj", "{B423D05C-F3B2-431D-BA1E-1E00F56DFE43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD7EC5CE-2D9D-4969-BE38-319D0C7AA0AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD7EC5CE-2D9D-4969-BE38-319D0C7AA0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD7EC5CE-2D9D-4969-BE38-319D0C7AA0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD7EC5CE-2D9D-4969-BE38-319D0C7AA0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B423D05C-F3B2-431D-BA1E-1E00F56DFE43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B423D05C-F3B2-431D-BA1E-1E00F56DFE43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B423D05C-F3B2-431D-BA1E-1E00F56DFE43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B423D05C-F3B2-431D-BA1E-1E00F56DFE43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2376C75A-95BC-4AFD-B030-7BA803C74111}
+	EndGlobalSection
+EndGlobal
