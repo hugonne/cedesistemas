@@ -4,5 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cedesistemas.WheresMyStuff.Models\Cedesistemas.WheresMyStuff.Models.csproj" />
+  </ItemGroup>
+
 
 </Project>
