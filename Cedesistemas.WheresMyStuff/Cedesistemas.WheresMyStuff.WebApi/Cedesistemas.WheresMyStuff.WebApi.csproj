@@ -9,4 +9,14 @@
   </ItemGroup>
 
 
+  <ItemGroup>
+    <Folder Include="Controllers\">
+      <DependentUpon>Controllers</DependentUpon>
+    </Folder>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cedesistemas.WheresMyStuff.Models\Cedesistemas.WheresMyStuff.Models.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
