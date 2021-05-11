@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cedesistemas.WheresMyStuff.WebApi", "Cedesistemas.WheresMyStuff.WebApi\Cedesistemas.WheresMyStuff.WebApi.csproj", "{4AC79413-7AE8-4E6A-9F73-64B84A8D6C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cedesistemas.WheresMyStuff.Models", "Cedesistemas.WheresMyStuff.Models\Cedesistemas.WheresMyStuff.Models.csproj", "{7540E4D6-19B8-4BC2-86F4-7037E8B9106F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cedesistemas.WheresMyStuff.Models", "Cedesistemas.WheresMyStuff.Models\Cedesistemas.WheresMyStuff.Models.csproj", "{7540E4D6-19B8-4BC2-86F4-7037E8B9106F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cedesistemas.WheresMyStuff.Repos", "Cedesistemas.WheresMyStuff.Repos\Cedesistemas.WheresMyStuff.Repos.csproj", "{43D71220-91AD-4557-942B-C41F772F08E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7540E4D6-19B8-4BC2-86F4-7037E8B9106F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7540E4D6-19B8-4BC2-86F4-7037E8B9106F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7540E4D6-19B8-4BC2-86F4-7037E8B9106F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D71220-91AD-4557-942B-C41F772F08E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D71220-91AD-4557-942B-C41F772F08E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D71220-91AD-4557-942B-C41F772F08E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D71220-91AD-4557-942B-C41F772F08E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

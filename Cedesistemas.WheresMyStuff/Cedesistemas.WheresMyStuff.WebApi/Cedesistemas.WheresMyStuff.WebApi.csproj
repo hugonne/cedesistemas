@@ -18,5 +18,6 @@
     <ProjectReference Include="..\Cedesistemas.WheresMyStuff.Models\Cedesistemas.WheresMyStuff.Models.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Cedesistemas.WheresMyStuff.Repos\Cedesistemas.WheresMyStuff.Repos.csproj" />
   </ItemGroup>
 </Project>
