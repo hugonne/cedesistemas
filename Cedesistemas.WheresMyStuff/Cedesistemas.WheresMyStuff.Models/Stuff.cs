@@ -2,6 +2,7 @@
 
 namespace Cedesistemas.WheresMyStuff.Models
 {
+    //POCO: Plain Old CLR Object
     public class Stuff
     {
         public int Id { get; set; }

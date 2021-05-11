@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cedesistemas.WheresMyStuff.Models;
 
 namespace Cedesistemas.WheresMyStuff.Repos
 {
-    public sealed class StuffRepo
+    public class StuffMemoryRepo : IStuffRepo
     {
-        private static StuffRepo _instance;
+        private readonly List<Stuff> _stuffList;
 
-        public List<Stuff> StuffList { get; set; }
-
-        private StuffRepo()
+        public StuffMemoryRepo()
         {
-            StuffList = new List<Stuff>
+            _stuffList = new List<Stuff>
             {
                 new Stuff {
                     Id = 1,
@@ -41,19 +40,38 @@ namespace Cedesistemas.WheresMyStuff.Repos
             };
         }
 
-        public static StuffRepo GetInstance()
+        public IEnumerable<Stuff> GetAll()
         {
-            //Opción 1:
-            //if (_instance == null)
-            //{
-            //    _instance = new StuffRepo();
-            //}
-            //return _instance;
+            return _stuffList;
+        }
 
-            //Opción 2:
-            //return _instance ?? (_instance = new StuffRepo());
+        public Stuff GetById(int id)
+        {
+            return _stuffList.FirstOrDefault(a => a.Id == id);
+        }
 
-            return _instance ??= new StuffRepo();
+        public void Add(Stuff stuff)
+        {
+            _stuffList.Add(stuff);
+        }
+
+        public void Update(Stuff stuff)
+        {
+            var existingStuff = GetById(stuff.Id);
+            if (existingStuff == null)
+            {
+                return;
+            }
+
+            existingStuff.Name = stuff.Name;
+            existingStuff.Location = stuff.Location;
+            existingStuff.DateTime = stuff.DateTime;
+            existingStuff.IsVisibleForAll = stuff.IsVisibleForAll;
+        }
+
+        public void Delete(Stuff stuff)
+        {
+            _stuffList.Remove(stuff);
         }
     }
 }

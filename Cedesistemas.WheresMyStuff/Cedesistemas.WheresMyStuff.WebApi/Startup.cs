@@ -1,15 +1,9 @@
+using Cedesistemas.WheresMyStuff.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cedesistemas.WheresMyStuff.WebApi
 {
@@ -26,6 +20,17 @@ namespace Cedesistemas.WheresMyStuff.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            #region Application Services
+
+            //La misma instancia para todos los clientes
+            services.AddSingleton<IStuffRepo, StuffMemoryRepo>();
+            //La misma instancia para cada cliente
+            //services.AddTransient<IStuffRepo, StuffMemoryRepo>();
+            //Una instancia diferente para todo el mundo
+            //services.AddScoped<IStuffRepo, StuffMemoryRepo>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

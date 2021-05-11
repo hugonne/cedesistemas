@@ -11,28 +11,30 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
     [Route("[controller]/[action]/{id?}")]
     public class StuffController : ControllerBase
     {
-        private readonly StuffRepo _stuffRepo;
+        private readonly StuffSingletonRepo _stuffSingletonRepo;
+        private readonly StuffMemoryRepo _stuffMemoryRepo;
 
         public StuffController()
         {
-            _stuffRepo = StuffRepo.GetInstance();
+            _stuffSingletonRepo = StuffSingletonRepo.GetInstance();
+            _stuffMemoryRepo = new StuffMemoryRepo();
         }
 
         public IActionResult GetAll()
         {
-            return Ok(_stuffRepo.StuffList);
+            return Ok(_stuffSingletonRepo.StuffList);
         }
 
         public IActionResult Add()
         {
-            _stuffRepo.StuffList.Add(new Stuff
+            _stuffSingletonRepo.StuffList.Add(new Stuff
             {
                 Id = 5,
                 Name = "Reloj azul",
                 Location = "Mesa de noche",
                 DateTime = DateTime.Now.AddDays(-1)
             });
-            return Ok(_stuffRepo.StuffList);
+            return Ok(_stuffSingletonRepo.StuffList);
         }
 
         public IActionResult GetById(int id)
@@ -40,7 +42,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
             //Linq
             //var stuff = _stuffList.FirstOrDefault(a => a.Id == id);
             //IEnumerable<Stuff> stuffList = _stuffList.Where(a => a.DateTime >= DateTime.Today.AddDays(-7) && a.Location.Contains("Linos"));
-            IEnumerable<Stuff> stuffList = _stuffRepo.StuffList.Where(a => a.Id == id);
+            IEnumerable<Stuff> stuffList = _stuffSingletonRepo.StuffList.Where(a => a.Id == id);
             Stuff stuff = stuffList.FirstOrDefault();
 
             if (stuff == null)
