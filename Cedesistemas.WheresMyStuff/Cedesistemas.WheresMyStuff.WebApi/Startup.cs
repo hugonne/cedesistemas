@@ -1,6 +1,8 @@
+using Cedesistemas.WheresMyStuff.DataAccess;
 using Cedesistemas.WheresMyStuff.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +22,13 @@ namespace Cedesistemas.WheresMyStuff.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            #region Entity Framework Services
+
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            #endregion
 
             #region Application Services
 

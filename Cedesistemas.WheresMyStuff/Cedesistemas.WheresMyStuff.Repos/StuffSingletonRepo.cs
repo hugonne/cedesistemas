@@ -20,25 +20,25 @@ namespace Cedesistemas.WheresMyStuff.Repos
                 new Item {
                     Id = 1,
                     Name = "Llaves del garaje",
-                    Location = "Segundo cajón del la biblioteca",
+                    //Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now,
                     IsVisibleForAll = true
                 },
                 new Item {
                     Id = 2,
                     Name = "Control Remoto",
-                    Location = "Segundo cajón del la biblioteca",
+                    //Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now.AddDays(-1)
                 },
                 new Item {
                     Id = 3,
                     Name = "Caja de herramientas",
-                    Location = "Cuarto de linos"
+                    //Location = "Cuarto de linos"
                 },
                 new Item {
                     Id = 4,
                     Name = "Pilas recargables",
-                    Location = "Cuarto de linos",
+                    //Location = "Cuarto de linos",
                     IsVisibleForAll = true
                 }
             };
