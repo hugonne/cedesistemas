@@ -24,7 +24,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi
             #region Application Services
 
             //La misma instancia para todos los clientes
-            services.AddSingleton<IStuffRepo, StuffMemoryRepo>();
+            services.AddSingleton<IItemsRepo, ItemsMemoryRepo>();
             //La misma instancia para cada cliente
             //services.AddTransient<IStuffRepo, StuffMemoryRepo>();
             //Una instancia diferente para todo el mundo

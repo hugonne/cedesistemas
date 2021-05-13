@@ -5,33 +5,33 @@ using Cedesistemas.WheresMyStuff.Models;
 
 namespace Cedesistemas.WheresMyStuff.Repos
 {
-    public class StuffMemoryRepo : IStuffRepo
+    public class ItemsMemoryRepo : IItemsRepo
     {
-        private readonly List<Stuff> _stuffList;
+        private readonly List<Item> _itemList;
 
-        public StuffMemoryRepo()
+        public ItemsMemoryRepo()
         {
-            _stuffList = new List<Stuff>
+            _itemList = new List<Item>
             {
-                new Stuff {
+                new Item {
                     Id = 1,
                     Name = "Llaves del garaje",
                     Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now,
                     IsVisibleForAll = true
                 },
-                new Stuff {
+                new Item {
                     Id = 2,
                     Name = "Control Remoto",
                     Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now.AddDays(-1)
                 },
-                new Stuff {
+                new Item {
                     Id = 3,
                     Name = "Caja de herramientas",
                     Location = "Cuarto de linos"
                 },
-                new Stuff {
+                new Item {
                     Id = 4,
                     Name = "Pilas recargables",
                     Location = "Cuarto de linos",
@@ -40,38 +40,41 @@ namespace Cedesistemas.WheresMyStuff.Repos
             };
         }
 
-        public IEnumerable<Stuff> GetAll()
+        public IEnumerable<Item> GetAll()
         {
-            return _stuffList;
+            return _itemList;
         }
 
-        public Stuff GetById(int id)
+        public Item GetById(int id)
         {
-            return _stuffList.FirstOrDefault(a => a.Id == id);
+            return _itemList.FirstOrDefault(a => a.Id == id);
         }
 
-        public void Add(Stuff stuff)
+        public int Add(Item item)
         {
-            _stuffList.Add(stuff);
+            item.Id = _itemList.Max(a => a.Id) + 1;
+            item.DateTime = DateTime.Now;
+            _itemList.Add(item);
+            return item.Id;
         }
 
-        public void Update(Stuff stuff)
+        public void Update(Item item)
         {
-            var existingStuff = GetById(stuff.Id);
+            var existingStuff = GetById(item.Id);
             if (existingStuff == null)
             {
                 return;
             }
 
-            existingStuff.Name = stuff.Name;
-            existingStuff.Location = stuff.Location;
-            existingStuff.DateTime = stuff.DateTime;
-            existingStuff.IsVisibleForAll = stuff.IsVisibleForAll;
+            existingStuff.Name = item.Name;
+            existingStuff.Location = item.Location;
+            existingStuff.DateTime = item.DateTime;
+            existingStuff.IsVisibleForAll = item.IsVisibleForAll;
         }
 
-        public void Delete(Stuff stuff)
+        public void Delete(Item item)
         {
-            _stuffList.Remove(stuff);
+            _itemList.Remove(item);
         }
     }
 }

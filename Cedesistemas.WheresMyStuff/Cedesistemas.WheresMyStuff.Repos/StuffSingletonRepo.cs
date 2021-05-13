@@ -11,31 +11,31 @@ namespace Cedesistemas.WheresMyStuff.Repos
     {
         private static StuffSingletonRepo _instance;
 
-        public List<Stuff> StuffList { get; set; }
+        public List<Item> StuffList { get; set; }
 
         private StuffSingletonRepo()
         {
-            StuffList = new List<Stuff>
+            StuffList = new List<Item>
             {
-                new Stuff {
+                new Item {
                     Id = 1,
                     Name = "Llaves del garaje",
                     Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now,
                     IsVisibleForAll = true
                 },
-                new Stuff {
+                new Item {
                     Id = 2,
                     Name = "Control Remoto",
                     Location = "Segundo cajón del la biblioteca",
                     DateTime = DateTime.Now.AddDays(-1)
                 },
-                new Stuff {
+                new Item {
                     Id = 3,
                     Name = "Caja de herramientas",
                     Location = "Cuarto de linos"
                 },
-                new Stuff {
+                new Item {
                     Id = 4,
                     Name = "Pilas recargables",
                     Location = "Cuarto de linos",
