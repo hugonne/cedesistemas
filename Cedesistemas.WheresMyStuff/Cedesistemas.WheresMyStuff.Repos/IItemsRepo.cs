@@ -7,8 +7,9 @@ namespace Cedesistemas.WheresMyStuff.Repos
     {
         IEnumerable<Item> GetAll();
         Item GetById(int id);
-        int Add(Item stuff);
-        void Update(Item stuff);
-        void Delete(Item stuff);
+        int Add(Item item);
+        void Delete(Item item);
+
+        void SaveChanges();
     }
 }

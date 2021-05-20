@@ -6,8 +6,7 @@ namespace Cedesistemas.WheresMyStuff.DataAccess
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {}
+        public ApplicationDbContext(DbContextOptions options) : base(options) {}
 
         public DbSet<Item> Items { get; set; }
         public DbSet<Location> Locations { get; set; }

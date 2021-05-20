@@ -13,12 +13,10 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemsRepo _itemsRepo;
-        private readonly IConfiguration _configuration;
 
-        public ItemsController(IItemsRepo itemsRepo, IConfiguration configuration)
+        public ItemsController(IItemsRepo itemsRepo)
         {
             _itemsRepo = itemsRepo;
-            _configuration = configuration;
         }
 
         [HttpGet]
@@ -46,7 +44,30 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         public IActionResult Add([FromBody] Item item)
         {
             var newItemId = _itemsRepo.Add(item);
+            _itemsRepo.SaveChanges();
             return Ok(newItemId);
+        }
+
+        [HttpPost]
+        public IActionResult Update([FromBody] Item item)
+        {
+            var existingItem = _itemsRepo.GetById(item.Id);
+            if(existingItem == null)
+            {
+                return NotFound();
+            }
+
+            existingItem.Name = item.Name;
+            existingItem.LocationId = item.LocationId;
+
+            //var newItem = new Item
+            //{
+            //    Name = "Test"
+            //};
+            //_itemsRepo.Add(newItem);
+
+            _itemsRepo.SaveChanges();
+            return Ok();
         }
     }
 }
