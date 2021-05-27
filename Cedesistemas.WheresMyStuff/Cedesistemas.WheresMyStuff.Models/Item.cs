@@ -11,6 +11,6 @@ namespace Cedesistemas.WheresMyStuff.Models
         public bool IsVisibleForAll { get; set; }
 
         public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public Location Location { get; set; } //Porpiedad de navegación
     }
 }

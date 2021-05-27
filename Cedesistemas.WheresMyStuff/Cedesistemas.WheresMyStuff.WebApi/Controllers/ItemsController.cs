@@ -20,9 +20,9 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(bool locations = false)
         {
-            return Ok(_itemsRepo.GetAll());
+            return Ok(_itemsRepo.GetAll(locations));
         }
 
         [HttpGet]

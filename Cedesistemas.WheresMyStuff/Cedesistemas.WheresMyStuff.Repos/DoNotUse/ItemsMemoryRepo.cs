@@ -40,7 +40,7 @@ namespace Cedesistemas.WheresMyStuff.Repos
             };
         }
 
-        public IEnumerable<Item> GetAll()
+        public IEnumerable<Item> GetAll(bool includeLocations = false)
         {
             return _itemList;
         }
@@ -75,6 +75,11 @@ namespace Cedesistemas.WheresMyStuff.Repos
         public void Delete(Item item)
         {
             _itemList.Remove(item);
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

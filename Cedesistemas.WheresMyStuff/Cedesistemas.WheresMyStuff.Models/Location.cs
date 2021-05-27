@@ -16,6 +16,6 @@ namespace Cedesistemas.WheresMyStuff.Models
 
         public bool IsHidden { get; set; }
 
-        public ICollection<Item> Items { get; set; }
+        public ICollection<Item> Items { get; set; } //Propiedad de navegación
     }
 }

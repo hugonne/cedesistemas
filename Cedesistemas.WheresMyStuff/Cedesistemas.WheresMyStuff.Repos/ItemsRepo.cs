@@ -1,5 +1,6 @@
 ﻿using Cedesistemas.WheresMyStuff.DataAccess;
 using Cedesistemas.WheresMyStuff.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,15 @@ namespace Cedesistemas.WheresMyStuff.Repos
             _context.Items.Remove(item);
         }
 
-        public IEnumerable<Item> GetAll()
+        public IEnumerable<Item> GetAll(bool includeLocations = false)
         {
+            if(includeLocations)
+            {
+                return _context.Items
+                    .Include(a => a.Location)
+                    .OrderBy(a => a.Name);
+            }
+
             return _context.Items.OrderBy(a => a.Name);
         }
 
