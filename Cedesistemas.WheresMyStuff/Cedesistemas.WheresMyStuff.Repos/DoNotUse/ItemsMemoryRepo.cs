@@ -17,14 +17,14 @@ namespace Cedesistemas.WheresMyStuff.Repos
                     Id = 1,
                     Name = "Llaves del garaje",
                     //Location = "Segundo cajón del la biblioteca",
-                    DateTime = DateTime.Now,
+                    CreatedDateTime = DateTime.Now,
                     IsVisibleForAll = true
                 },
                 new Item {
                     Id = 2,
                     Name = "Control Remoto",
                     //Location = "Segundo cajón del la biblioteca",
-                    DateTime = DateTime.Now.AddDays(-1)
+                    CreatedDateTime = DateTime.Now.AddDays(-1)
                 },
                 new Item {
                     Id = 3,
@@ -53,7 +53,7 @@ namespace Cedesistemas.WheresMyStuff.Repos
         public int Add(Item item)
         {
             item.Id = _itemList.Max(a => a.Id) + 1;
-            item.DateTime = DateTime.Now;
+            item.CreatedDateTime = DateTime.Now;
             _itemList.Add(item);
             return item.Id;
         }
@@ -68,7 +68,7 @@ namespace Cedesistemas.WheresMyStuff.Repos
 
             existingStuff.Name = item.Name;
             existingStuff.Location = item.Location;
-            existingStuff.DateTime = item.DateTime;
+            existingStuff.CreatedDateTime = item.CreatedDateTime;
             existingStuff.IsVisibleForAll = item.IsVisibleForAll;
         }
 

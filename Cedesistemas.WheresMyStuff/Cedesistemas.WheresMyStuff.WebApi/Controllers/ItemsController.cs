@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cedesistemas.WheresMyStuff.Models;
 using Cedesistemas.WheresMyStuff.Repos;
+using Cedesistemas.WheresMyStuff.WebApi.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -22,7 +23,19 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         [HttpGet]
         public IActionResult GetAll(bool locations = false)
         {
-            return Ok(_itemsRepo.GetAll(locations));
+            var allLocations = _itemsRepo
+                .GetAll(locations)
+                .Select(
+                    a => new ItemDto
+                    {
+                        Id = a.Id,
+                        Name = a.Name,
+                        LocationId = a.LocationId,
+                        //Usando operadores de propagación:: (si lo de la izquierda del ? es null, devuelve null
+                        //si no es null, devuelve lo de la derecha del ?
+                        LocationName = a.Location?.Name?.ToUpper() //a.Location == null ? null : a.Location.Name
+                    });
+            return Ok(allLocations);
         }
 
         [HttpGet]
@@ -31,20 +44,41 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
             //Linq
             //var stuff = _stuffList.FirstOrDefault(a => a.Id == id);
             //IEnumerable<Stuff> stuffList = _stuffList.Where(a => a.DateTime >= DateTime.Today.AddDays(-7) && a.Location.Contains("Linos"));
-            var stuff = _itemsRepo.GetById(id);
-
-            if (stuff == null)
+            var item = _itemsRepo.GetById(id);
+            
+            if (item == null)
             {
                 return NotFound("El objeto solicitado no se ha encontrado en el sistema"); //HTTP 404
             }
-            return Ok(stuff); //HTTP 200
+
+            var itemDto = new ItemDto
+            {
+                Id = item.Id,
+                Name = item.Name,
+                LocationId = item.LocationId,
+                LocationName = item.Location.Name
+            };
+            return Ok(itemDto); //HTTP 200
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] Item item)
+        public IActionResult Add([FromBody] ItemDto itemDto)
         {
+            var item = new Item
+            {
+                Name = itemDto.Name,
+                LocationId = itemDto.LocationId,
+                CreatedDateTime = DateTime.Now
+            };
+
+            if(!TryValidateModel(item))
+            {
+                return BadRequest(ModelState);
+            }
+
             var newItemId = _itemsRepo.Add(item);
             _itemsRepo.SaveChanges();
+
             return Ok(newItemId);
         }
 

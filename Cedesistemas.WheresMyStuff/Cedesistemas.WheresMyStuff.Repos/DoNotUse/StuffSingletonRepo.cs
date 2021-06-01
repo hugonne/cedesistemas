@@ -21,14 +21,14 @@ namespace Cedesistemas.WheresMyStuff.Repos
                     Id = 1,
                     Name = "Llaves del garaje",
                     //Location = "Segundo cajón del la biblioteca",
-                    DateTime = DateTime.Now,
+                    CreatedDateTime = DateTime.Now,
                     IsVisibleForAll = true
                 },
                 new Item {
                     Id = 2,
                     Name = "Control Remoto",
                     //Location = "Segundo cajón del la biblioteca",
-                    DateTime = DateTime.Now.AddDays(-1)
+                    CreatedDateTime = DateTime.Now.AddDays(-1)
                 },
                 new Item {
                     Id = 3,

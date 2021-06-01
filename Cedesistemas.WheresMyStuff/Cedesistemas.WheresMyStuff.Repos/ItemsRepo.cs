@@ -44,11 +44,11 @@ namespace Cedesistemas.WheresMyStuff.Repos
         {
             var items =
                 from a in _context.Items
-                where a.DateTime >= DateTime.Now.AddDays(-7) && a.IsVisibleForAll
+                where a.CreatedDateTime >= DateTime.Now.AddDays(-7) && a.IsVisibleForAll
                 select a;
 
             var lambdaItems = _context.Items
-                .Where(a => a.DateTime >= DateTime.Now.AddDays(-7) && a.IsVisibleForAll)
+                .Where(a => a.CreatedDateTime >= DateTime.Now.AddDays(-7) && a.IsVisibleForAll)
                 .Select(a => a.Name);
 
             return items;
@@ -56,7 +56,9 @@ namespace Cedesistemas.WheresMyStuff.Repos
 
         public Item GetById(int id)
         {
-            return _context.Items.Find(id);
+            return _context.Items
+                .Include(a => a.Location)
+                .FirstOrDefault(a => a.Id == id);
         }
 
         public void SaveChanges()
