@@ -1,11 +1,16 @@
 using Cedesistemas.WheresMyStuff.DataAccess;
+using Cedesistemas.WheresMyStuff.Models;
 using Cedesistemas.WheresMyStuff.Repos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Cedesistemas.WheresMyStuff.WebApi
 {
@@ -21,16 +26,45 @@ namespace Cedesistemas.WheresMyStuff.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Use DTOs instead
-            services.AddControllers()
-                .AddNewtonsoftJson(
-                    options => options.SerializerSettings.ReferenceLoopHandling =
-                        Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //We're using DTOs instead, so we don't need this:
+            //services.AddControllers()
+            //    .AddNewtonsoftJson(
+            //        options => options.SerializerSettings.ReferenceLoopHandling =
+            //            Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             #region Entity Framework Services
 
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
+                options =>
+                {
+                    options.Password.RequireUppercase = true;
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddRoles<ApplicationRole>()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication(
+                options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(
+                    options =>
+                    {
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidIssuer = Configuration["Tokens:Issuer"],
+                            ValidAudience = Configuration["Tokens:Audience"],
+                            IssuerSigningKey =
+                                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                        };
+                    });
+
+            services.AddControllers();
 
             #endregion
 

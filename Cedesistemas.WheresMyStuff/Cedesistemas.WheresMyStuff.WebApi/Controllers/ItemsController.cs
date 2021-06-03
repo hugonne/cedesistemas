@@ -4,6 +4,8 @@ using System.Linq;
 using Cedesistemas.WheresMyStuff.Models;
 using Cedesistemas.WheresMyStuff.Repos;
 using Cedesistemas.WheresMyStuff.WebApi.Dtos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -11,6 +13,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]/{id?}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ItemsController : ControllerBase
     {
         private readonly IItemsRepo _itemsRepo;
@@ -21,6 +24,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll(bool locations = false)
         {
             var allLocations = _itemsRepo
@@ -45,7 +49,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
             //var stuff = _stuffList.FirstOrDefault(a => a.Id == id);
             //IEnumerable<Stuff> stuffList = _stuffList.Where(a => a.DateTime >= DateTime.Today.AddDays(-7) && a.Location.Contains("Linos"));
             var item = _itemsRepo.GetById(id);
-            
+
             if (item == null)
             {
                 return NotFound("El objeto solicitado no se ha encontrado en el sistema"); //HTTP 404
@@ -71,7 +75,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
                 CreatedDateTime = DateTime.Now
             };
 
-            if(!TryValidateModel(item))
+            if (!TryValidateModel(item))
             {
                 return BadRequest(ModelState);
             }
@@ -86,7 +90,7 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         public IActionResult Update([FromBody] Item item)
         {
             var existingItem = _itemsRepo.GetById(item.Id);
-            if(existingItem == null)
+            if (existingItem == null)
             {
                 return NotFound();
             }
