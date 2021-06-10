@@ -10,25 +10,36 @@ namespace Cedesistemas.Solid.SRP
 {
     public class UserService
     {
+        private readonly EmailValidator _validator;
+        private readonly EmailSender _sender;
+
+        public UserService(EmailValidator validator, EmailSender sender)
+        {
+            string a = "Hola Mundo";
+            a = a.ToSentence();
+
+            _validator = validator;
+            _sender = sender;
+        }
+
         public void Register(string email, string password)
         {
-            if (!ValidateEmail(email))
+            if (!_validator.ValidateEmail(email))
                 throw new ValidationException("Email is not an email");
 
             //var user = new User(email, password);
 
-            SendEmail(new MailMessage("mysite@nowhere.com", email) { Subject = "Hello foo" });
+            _sender.SendEmail(new MailMessage("mysite@nowhere.com", email) { Subject = "Hello foo" });
         }
 
-        public virtual bool ValidateEmail(string email)
-        {
-            return email.Contains("@");
-        }
 
-        public bool SendEmail(MailMessage message)
+    }
+
+    public static class StringExtensions
+    {
+        public static string ToSentence(this string a)
         {
-            //
-            return true;
+            return a + ".";
         }
     }
 }
