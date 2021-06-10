@@ -23,15 +23,18 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<ApplicationUser> _roleManager;
         private readonly IConfiguration _config;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<ApplicationUser> roleManager,
             IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _config = config;
         }
 
@@ -39,6 +42,11 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
+            if (!TryValidateModel(login))
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = await _userManager.FindByNameAsync(login.Email);
 
             if(user == null)

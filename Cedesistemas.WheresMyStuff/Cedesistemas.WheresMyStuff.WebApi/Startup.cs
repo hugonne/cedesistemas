@@ -40,6 +40,9 @@ namespace Cedesistemas.WheresMyStuff.WebApi
             services.AddIdentity<ApplicationUser, ApplicationRole>(
                 options =>
                 {
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 6;
                     options.Password.RequireUppercase = true;
                     options.User.RequireUniqueEmail = true;
                 })
