@@ -24,9 +24,9 @@ namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public IActionResult GetAll(bool locations = false)
         {
+            //var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var allLocations = _itemsRepo
                 .GetAll(locations)
                 .Select(
