@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 namespace Cedesistemas.WheresMyStuff.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]/{id?}")]
+    [Route("[action]/[controller]/{id?}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ItemsController : ControllerBase
     {

@@ -32,9 +32,7 @@ namespace Cedesistemas.WheresMyStuff.Repos
         {
             if(includeLocations)
             {
-                return _context.Items
-                    .Include(a => a.Location)
-                    .OrderBy(a => a.Name);
+                return _context.Items;
             }
 
             return _context.Items.OrderBy(a => a.Name);
