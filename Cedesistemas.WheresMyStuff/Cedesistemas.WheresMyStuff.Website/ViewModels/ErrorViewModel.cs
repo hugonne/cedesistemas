@@ -1,6 +1,6 @@
 using System;
 
-namespace Test.Models
+namespace Cedesistemas.WheresMyStuff.Website.Models
 {
     public class ErrorViewModel
     {

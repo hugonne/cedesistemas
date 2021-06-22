@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Test
+namespace Cedesistemas.WheresMyStuff.Website
 {
     public class Program
     {
