@@ -1,5 +1,6 @@
 using Cedesistemas.WheresMyStuff.DataAccess;
 using Cedesistemas.WheresMyStuff.Models;
+using Cedesistemas.WheresMyStuff.Repos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,24 +29,30 @@ namespace Cedesistemas.WheresMyStuff.Website
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<ApplicationDbContext>(
-            //    options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddIdentity<ApplicationUser, ApplicationRole>(
-            //    options =>
-            //    {
-            //        options.Password.RequireLowercase = false;
-            //        options.Password.RequireNonAlphanumeric = false;
-            //        options.Password.RequiredLength = 6;
-            //        options.Password.RequireUppercase = true;
-            //        options.User.RequireUniqueEmail = true;
-            //    })
-            //    .AddRoles<ApplicationRole>()
-            //    .AddDefaultTokenProviders()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, ApplicationRole>(
+                options =>
+                {
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireUppercase = true;
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddRoles<ApplicationRole>()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            #region Application Services
+
+            services.AddTransient<IItemsRepo, ItemsRepo>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +61,6 @@ namespace Cedesistemas.WheresMyStuff.Website
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
