@@ -42,7 +42,6 @@ namespace Cedesistemas.WheresMyStuff.Website
                     options.User.RequireUniqueEmail = true;
                 })
                 .AddRoles<ApplicationRole>()
-                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
