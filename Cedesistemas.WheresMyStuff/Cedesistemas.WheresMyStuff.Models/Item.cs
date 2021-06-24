@@ -12,7 +12,7 @@ namespace Cedesistemas.WheresMyStuff.Models
         public int Id { get; set; }
 
         [MaxLength(64)]
-        [Required(ErrorMessage = "El campo es requerido")]
+        [Required]
         //[DataType(DataType.EmailAddress)]
         public string Name { get; set; }
 

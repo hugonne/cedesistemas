@@ -1,0 +1,16 @@
+﻿@using Cedesistemas.WheresMyStuff.Website.ViewModels
+@model ItemViewModel
+
+<div>
+    <div>
+        <label>
+            @Html.DisplayNameFor(a => a.Id)
+        </label>:
+        @Html.TextBoxFor(a => a.Id, new { @class="col-md-4" })
+    </div>
+
+    <div>
+        <label asp-for="Name"></label>:
+        <input asp-for="Name" class="col-md-4" />
+    </div>
+</div>

@@ -41,6 +41,18 @@ namespace Cedesistemas.WheresMyStuff.Website.Controllers
             return View(items);
         }
 
+        public IActionResult Details(int id)
+        {
+            var item = _itemsRepo.GetById(id);
+            return View(new ItemViewModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                LocationId = item.LocationId,
+                LocationName = item.Location?.Name?.ToUpper()
+            });
+        }
+
         public IActionResult Privacy()
         {
             return View();

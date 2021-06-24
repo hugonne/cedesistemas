@@ -3,32 +3,35 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    int pageSize = 10;
-    int pageNumber = 5;
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>
-        En este curso estamos aprendiendo mucho de MVC. A continuación vamos a contar hasta 10:
-        @for (int i = 1; i <= 10; i++)
-        {
-            <div>@i</div>
-        }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">
+                            Detalle
+                        </a>
+                        @*@Html.ActionLink("Detalle", "Details", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
         La fecha actual es @ViewData["Date"]
-
-        @foreach (var item in Model.Skip((pageNumber - 1) * pageSize).Take(pageSize))
-        {
-            <div>
-                <label>Id:</label>
-                @item.Id
-            </div>
-
-            <div>
-                <label>Name:</label>
-                @item.Name
-            </div>
-        }
-
-    </p>
+    </div>
 </div>
