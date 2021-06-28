@@ -76,13 +76,6 @@ namespace Cedesistemas.WheresMyStuff.DataAccess.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("Cedesistemas.WheresMyStuff.Models.Location", b =>
-                {
-                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
